@@ -12,3 +12,13 @@ target_link_libraries(config_test zws_base)
 
 add_executable(thread_test thread_test.cc)
 target_link_libraries(thread_test zws_base)
+
+add_executable(fiber_test1 fiber_test1.cc)
+target_link_libraries(fiber_test1 zws_base)
+
+add_executable(fiber_test2 fiber_test2.cc)
+target_link_libraries(fiber_test2 zws_base)
+
+
+add_executable(scheduler_test scheduler_test.cc)
+target_link_libraries(scheduler_test zws_base)
