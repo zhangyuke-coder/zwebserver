@@ -1,2 +1,8 @@
 add_executable(log_test log_test.cc)
 target_link_libraries(log_test zws_base)
+
+add_executable(env_test env_test.cc)
+target_link_libraries(env_test zws_base)
+
+add_executable(util_test util_test.cc)
+target_link_libraries(util_test zws_base)
