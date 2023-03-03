@@ -6,7 +6,11 @@
  */
 
 #include "src/zws.h"
+<<<<<<< HEAD
 
+=======
+using namespace zws;
+>>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
 static Logger::ptr g_logger = LOG_ROOT();
 
 /**
@@ -19,10 +23,17 @@ void test_fiber1() {
      * 协程主动让出执行权，在yield之前，协程必须再次将自己添加到调度器任务队列中，
      * 否则yield之后没人管，协程会处理未执行完的逃逸状态，测试时可以将下面这行注释掉以观察效果
      */
+<<<<<<< HEAD
     Scheduler::GetThis()->schedule(Fiber::GetThis());
 
     LOG_INFO(g_logger) << "before test_fiber1 yield";
     Fiber::GetThis()->yield();
+=======
+    Scheduler::GetThis()->schedule(Coroutine::GetCurrentCoroutine());
+
+    LOG_INFO(g_logger) << "before test_fiber1 yield";
+    Coroutine::Yield();
+>>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
     LOG_INFO(g_logger) << "after test_fiber1 yield";
 
     LOG_INFO(g_logger) << "test_fiber1 end";
@@ -88,7 +99,13 @@ int main() {
     sc.schedule(test_fiber2);
 
     // 添加调度任务，使用Fiber类作为调度对象
+<<<<<<< HEAD
     Fiber::ptr fiber(new Fiber(&test_fiber3));
+=======
+    int stack_size = 128 * 1024;
+    char* sp2 = reinterpret_cast<char*>(malloc(stack_size));
+    Coroutine::ptr fiber(new Coroutine(stack_size, sp2, test_fiber3));
+>>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
     sc.schedule(fiber);
 
     // 创建调度线程，开始任务调度，如果只使用main函数线程进行调度，那start相当于什么也没做
