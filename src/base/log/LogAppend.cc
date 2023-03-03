@@ -1,3 +1,4 @@
+#include <yaml-cpp/yaml.h>
 #include "LogAppend.h"
 
 namespace zws {
@@ -32,6 +33,9 @@ FileLogAppender::FileLogAppender(const std::string &file)
     : LogAppender(LogFormatter::ptr(new LogFormatter)) {
     m_filename = file;
     reopen();
+    if(m_reopenError) {
+        std::cout << "reopen file " << m_filename << " error" << std::endl;
+    }
 }
 
 /**
@@ -63,5 +67,29 @@ bool FileLogAppender::reopen() {
     }
     m_filestream.open(m_filename, std::ios::app);
     return !!m_filestream;
+}
+
+
+
+std::string StdoutLogAppender::toYamlString() {
+    MutexType::Lock lock(m_mutex);
+    YAML::Node node;
+    node["type"] = "StdoutLogAppender";
+    node["pattern"] = m_formatter->getPattern();
+    std::stringstream ss;
+    ss << node;
+    return ss.str();
+}
+
+
+std::string FileLogAppender::toYamlString() {
+    MutexType::Lock lock(m_mutex);
+    YAML::Node node;
+    node["type"] = "FileLogAppender";
+    node["file"] = m_filename;
+    node["pattern"] = m_formatter ? m_formatter->getPattern() : m_defaultFormatter->getPattern();
+    std::stringstream ss;
+    ss << node;
+    return ss.str();
 }
 }

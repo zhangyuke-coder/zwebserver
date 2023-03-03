@@ -6,3 +6,4 @@
 #include "src/base/Util.h"
 #include "src/base/singleton.h"
 #include "src/base/mutex.h"
+#include "src/base/thread.h"

@@ -9,3 +9,6 @@ target_link_libraries(util_test zws_base)
 
 add_executable(config_test config_test.cc)
 target_link_libraries(config_test zws_base)
+
+add_executable(thread_test thread_test.cc)
+target_link_libraries(thread_test zws_base)
