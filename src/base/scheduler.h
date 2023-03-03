@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #pragma once 
 #include <memory>
 #include <string>
@@ -6,25 +5,6 @@
 #include <vector>
 #include "mutex.h"
 #include "fiber.h"
-=======
-/**
- * @file scheduler.h
- * @brief 协程调度器实现
- * @version 0.1
- * @date 2021-06-15
- */
-#pragma once
-
-#include <functional>
-#include <list>
-#include <memory>
-#include <string>
-#include "coroutine/coroutine.h"
-
-#include "log/logging.h"
-#include "thread.h"
-#include "mutex.h"
->>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
 namespace zws {
 
 /**
@@ -63,11 +43,7 @@ public:
     /**
      * @brief 获取当前线程的主协程
      */
-<<<<<<< HEAD
     static Fiber *GetMainFiber();
-=======
-    static Coroutine *GetMainCoroutine();
->>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
 
     /**
      * @brief 添加调度任务
@@ -146,7 +122,6 @@ private:
      * @brief 调度任务，协程/函数二选一，可指定在哪个线程上调度
      */
     struct ScheduleTask {
-<<<<<<< HEAD
         Fiber::ptr fiber;
         std::function<void()> cb;
         int thread;
@@ -156,17 +131,6 @@ private:
             thread = thr;
         }
         ScheduleTask(Fiber::ptr *f, int thr) {
-=======
-        Coroutine::ptr fiber;
-        std::function<void()> cb;
-        int thread;
-
-        ScheduleTask(Coroutine::ptr f, int thr) {
-            fiber  = f;
-            thread = thr;
-        }
-        ScheduleTask(Coroutine::ptr *f, int thr) {
->>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
             fiber.swap(*f);
             thread = thr;
         }
@@ -204,20 +168,11 @@ private:
     /// 是否use caller
     bool m_useCaller;
     /// use_caller为true时，调度器所在线程的调度协程
-<<<<<<< HEAD
     Fiber::ptr m_rootFiber;
-=======
-    Coroutine::ptr m_rootFiber;
->>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
     /// use_caller为true时，调度器所在线程的id
     int m_rootThread = 0;
 
     /// 是否正在停止
     bool m_stopping = false;
 };
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> 7e0298e329ef53ccd53862ed5d4e1a64a8aa6cb2
