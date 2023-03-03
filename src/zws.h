@@ -7,3 +7,5 @@
 #include "src/base/singleton.h"
 #include "src/base/mutex.h"
 #include "src/base/thread.h"
+#include "src/base/coroutine/coroutine.h"
+#include "src/base/scheduler.h"
