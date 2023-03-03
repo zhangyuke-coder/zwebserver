@@ -58,6 +58,7 @@ public:
      * @return 格式化日志流
      */
     std::ostream &format(std::ostream &os, LogEvent::ptr event);
+    std::string getPattern() const { return m_pattern; }
 
 public:
     /**

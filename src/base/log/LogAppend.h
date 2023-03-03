@@ -41,6 +41,10 @@ public:
      * @brief 写入日志
      */
     virtual void log(LogEvent::ptr event) = 0;
+    /**
+     * @brief 将日志输出目标的配置转成YAML String
+     */
+    virtual std::string toYamlString() = 0;
 
 protected:
     /// Mutex
@@ -67,6 +71,10 @@ public:
      * @brief 写入日志
      */
     void log(LogEvent::ptr event) override;
+     /**
+     * @brief 将日志输出目标的配置转成YAML String
+     */
+    std::string toYamlString() override;
 };
 
 /**
@@ -92,6 +100,10 @@ public:
      * @return 成功返回true
      */
     bool reopen();
+    /**
+     * @brief 将日志输出目标的配置转成YAML String
+     */
+    std::string toYamlString() override;
 
 private:
     /// 文件路径
@@ -100,5 +112,7 @@ private:
     std::ofstream m_filestream;
     /// 上次重打打开时间
     uint64_t m_lastTime = 0;
+        /// 文件打开错误标识
+    bool m_reopenError = false;
 };
 } // namespace zws

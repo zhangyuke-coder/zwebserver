@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
 
 project(ZWS C CXX)
-# ENABLE_LANGUAGE(ASM)
+ENABLE_LANGUAGE(ASM)
 enable_testing()
 
 # if(NOT CMAKE_BUILD_TYPE)
